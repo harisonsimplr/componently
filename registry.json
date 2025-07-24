@@ -1,0 +1,27 @@
+{
+  "components": {
+    "button": {
+      "name": "button",
+      "dependencies": [
+        "class-variance-authority",
+        "@radix-ui/react-slot"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "sourcePath": "https://raw.githubusercontent.com/your-username/your-repo/main/src/components/ui/button.tsx"
+        }
+      ]
+    },
+    "input": {
+      "name": "input",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "sourcePath": "https://raw.githubusercontent.com/your-username/your-repo/main/src/components/ui/input.tsx"
+        }
+      ]
+    }
+  }
+}
