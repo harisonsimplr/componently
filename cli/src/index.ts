@@ -5,6 +5,8 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import axios from 'axios';
 import prompts from 'prompts';
+import { exec } from 'child_process';
+import ora from 'ora';
 
 const program = new Command();
 
@@ -47,6 +49,7 @@ program
   .command('add <component>')
   .description('Add a component to your project.')
   .action(async (componentName) => {
+    const spinner = ora('Adding component...').start();
     try {
       // In a real CLI, you'd fetch this from a remote URL
       const registryPath = path.join(process.cwd(), '..', 'registry.json');
@@ -55,7 +58,7 @@ program
       const component = registry.components[componentName];
 
       if (!component) {
-        console.error(`Component '${componentName}' not found in registry.`);
+        spinner.fail(`Component '${componentName}' not found in registry.`);
         return;
       }
 
@@ -66,17 +69,25 @@ program
         
         await fs.ensureDir(path.dirname(destinationPath));
         await fs.writeFile(destinationPath, sourceContent);
-        console.log(`Added component: ${file.path}`);
+        spinner.succeed(`Added component: ${file.path}`);
       }
 
       if (component.dependencies && component.dependencies.length > 0) {
-        console.log('Installing dependencies...');
-        // Here you would run npm install for the dependencies
-        console.log(component.dependencies.join(' '));
+        spinner.start('Installing dependencies...');
+        const deps = component.dependencies.join(' ');
+        exec(`npm install ${deps}`, (err, stdout, stderr) => {
+          if (err) {
+            spinner.fail('Failed to install dependencies.');
+            console.error(stderr);
+            return;
+          }
+          spinner.succeed('Dependencies installed.');
+        });
       }
 
     } catch (error) {
-      console.error('Error adding component:', error);
+      spinner.fail('Error adding component.');
+      console.error(error);
     }
   });
 
