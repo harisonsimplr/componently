@@ -9,7 +9,7 @@
       "files": [
         {
           "path": "src/components/ui/button.tsx",
-          "sourcePath": "https://raw.githubusercontent.com/your-username/your-repo/main/src/components/ui/button.tsx"
+          "sourcePath": "https://raw.githubusercontent.com/harisonsimplr/componently/main/src/components/ui/button.tsx"
         }
       ]
     },
@@ -19,7 +19,7 @@
       "files": [
         {
           "path": "src/components/ui/input.tsx",
-          "sourcePath": "https://raw.githubusercontent.com/your-username/your-repo/main/src/components/ui/input.tsx"
+          "sourcePath": "https://raw.githubusercontent.com/harisonsimplr/componently/main/src/components/ui/input.tsx"
         }
       ]
     }
